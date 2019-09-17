@@ -2,12 +2,16 @@ apiVersion: v1
 kind: Service
 metadata:
   name: demomicroprofileservice
+  labels:
+    app: demomicroprofileservice
 spec:
-  selector:
-    app: demomicroprofile
   type: NodePort
+  selector:
+    app: shopfront
   ports:
-    - port: 8080
-      nodePort: 30225
+  - protocol: TCP
+    port: 8010
+    name: http
+    nodePort: 30225
       
       

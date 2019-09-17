@@ -1,32 +1,22 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: demomicroprofile
-  labels:
-    app: demomicroprofile
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: demomicroprofile
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 33%
+  replicas: 1
   template:
     metadata:
       labels:
         app: demomicroprofile
     spec:
       containers:
-        - name: demomicroprofile
-          image: kaiiiiii/<IMAGENAME>
-          ports:
-            - containerPort: 8080
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 8080
-            initialDelaySeconds: 10
-            periodSeconds: 10
+      - name: demomicroprofile
+        image: kaiiiiii/<IMAGENAME>
+        ports:
+        - containerPort: 8010
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8010
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
