@@ -6,7 +6,7 @@
     </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint"
-                  httpPort="8181"
+                  httpPort="8080"
                   httpsPort="8543"/>
 
     <webApplication location="${project.name}.war" contextRoot="/"/>
