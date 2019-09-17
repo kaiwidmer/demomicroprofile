@@ -1,4 +1,4 @@
-FROM openjdk:12-jre
+FROM openjdk:12
 WORKDIR /builds/kaiiiiii/demomicroprofile
 COPY target/app.jar .
 EXPOSE 8010
