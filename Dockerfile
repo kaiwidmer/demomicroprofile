@@ -1,5 +1,5 @@
-FROM clockworksoul/java-for-k8s:10-jdk
+FROM openjdk:12.0.2-jdk-oraclelinux7
 WORKDIR /builds/kaiiiiii/demomicroprofile
 COPY target/app.jar .
 EXPOSE 8080
-CMD ["java", "-XX:-UseContainerSupport", "-jar", "app.jar"]
+CMD ["java", "-jar", "app.jar"]
