@@ -5,7 +5,9 @@ metadata:
 spec:
   selector:
     app: demomicroprofile
+  type: NodePort
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
+    - port: 8080
+      nodePort: 30225
+      
+      
