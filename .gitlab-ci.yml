@@ -39,7 +39,8 @@ containerize:
   tags:
     - docker
   script:
-    - readlink -f app.jar
+    - ls
+    - readlink -f target/app.jar
     - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
     - docker build -t ${CONTAINER_IMAGE} .
     - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE}
