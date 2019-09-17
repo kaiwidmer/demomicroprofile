@@ -1,4 +1,4 @@
-FROM openjdk:12-jdk-alpine
+FROM clockworksoul/java-for-k8s:10-jdk
 WORKDIR /builds/kaiiiiii/demomicroprofile
 COPY target/app.jar .
 EXPOSE 8080
