@@ -1,0 +1,51 @@
+image: maven:latest
+
+variables:
+  CONTAINER_IMAGE: kaiiiiii/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
+
+build:
+  stage: build
+  script:
+    - mvn compile
+
+test:
+  stage: test
+  script:
+    - mvn test
+
+package:
+  stage: package
+  script:
+    - mvn clean install
+  artifacts:
+    paths:
+      - target/app.jar
+  only:
+    - master
+
+containerize:
+  image: docker:latest
+  services:
+  - docker:dind
+  stage: containerize
+  tags:
+    - docker
+  script:
+    - docker login -u ${DOCKER_USER} -p ${DOCKER_PASSWORD}
+    - docker build -t ${CONTAINER_IMAGE} .
+    - docker tag ${CONTAINER_IMAGE} ${CONTAINER_IMAGE}
+    - docker push ${CONTAINER_IMAGE}
+    
+deploy:
+  deploy:
+  stage: deploy
+  image: dtzar/helm-kubectl
+  script:
+    - kubectl config set-cluster k8s --server="${SERVER}"
+    - kubectl config set clusters.k8s.certificate-authority-data ${CERTIFICATE_AUTHORITY_DATA}
+    - kubectl config set-credentials gitlab --token="${USER_TOKEN}"
+    - kubectl config set-context default --cluster=k8s --user=gitlab
+    - kubectl config use-context default
+    - sed -i "s/<IMAGENAME>/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}/g" deployment.yaml
+    - kubectl apply -f deployment.yaml
+   
