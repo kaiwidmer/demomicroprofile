@@ -58,5 +58,4 @@ deploy:
     - sed -i "s/<IMAGENAME>/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}/g" deployment.yaml
     - kubectl apply -f deployment.yaml
     - kubectl apply -f service.yaml
-    - kubectl apply -f ingress.yaml
    
