@@ -1,5 +1,5 @@
-FROM openjdk:10-jre
+FROM openjdk:8-jre
 WORKDIR /builds/kaiiiiii/demomicroprofile
 COPY target/app.jar .
 EXPOSE 8010
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
