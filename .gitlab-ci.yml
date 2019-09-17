@@ -1,19 +1,27 @@
-image: maven:latest
+stages:
+  - build
+  - test
+  - package
+  - containerize
+  - deploy
 
 variables:
   CONTAINER_IMAGE: kaiiiiii/${CI_PROJECT_NAME}:${CI_COMMIT_SHORT_SHA}
 
 build:
+  image: maven:latest
   stage: build
   script:
     - mvn compile
 
 test:
+  image: maven:latest
   stage: test
   script:
     - mvn test
 
 package:
+  image: maven:latest
   stage: package
   script:
     - mvn clean install
@@ -37,7 +45,6 @@ containerize:
     - docker push ${CONTAINER_IMAGE}
     
 deploy:
-  deploy:
   stage: deploy
   image: dtzar/helm-kubectl
   script:
