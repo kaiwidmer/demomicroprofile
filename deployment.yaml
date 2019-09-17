@@ -3,12 +3,12 @@ kind: Deployment
 metadata:
   name: demomicroprofile
   labels:
-    app: glassfish
+    app: demomicroprofile
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: glassfish
+      app: demomicroprofile
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,10 +17,10 @@ spec:
   template:
     metadata:
       labels:
-        app: glassfish
+        app: demomicroprofile
     spec:
       containers:
-        - name: glassfish
+        - name: demomicroprofile
           image: kaiiiiii/<IMAGENAME>
           ports:
             - containerPort: 8080

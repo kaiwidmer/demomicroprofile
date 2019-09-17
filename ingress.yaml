@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: demomicroprofileingress
+spec:
+  rules:
+  - host: https://c5.par01.containers.cloud.ibm.com
+    http:
+      paths:
+      - path: /demomicroprofile
+        backend:
+          serviceName: demomicroprofileservice
+          servicePort: 80
